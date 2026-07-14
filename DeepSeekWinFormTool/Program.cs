@@ -12,14 +12,18 @@ namespace DeepSeekBatchTool
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // 授权验证
-            if (!LicenseManager.IsLicensed())
+            // 检查授权状态
+            if (!LicenseManager.IsAuthorized())
             {
                 using (var licenseForm = new LicenseForm())
                 {
+                    // 如果用户取消或关闭，退出程序
                     if (licenseForm.ShowDialog() != DialogResult.OK)
                         return;
                 }
+                // 再次检查（如果激活成功，则继续）
+                if (!LicenseManager.IsAuthorized())
+                    return;
             }
 
             Application.Run(new Form1());

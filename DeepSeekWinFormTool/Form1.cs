@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DeepSeekBatchTool.Core;
+using DeepSeekBatchTool.License;
 using DeepSeekBatchTool.Utils;
 
 namespace DeepSeekBatchTool
@@ -42,7 +43,8 @@ namespace DeepSeekBatchTool
 
         private void BuildUI()
         {
-            this.Text = "DeepSeek 批量处理大师 v3.0";
+            var status = LicenseManager.GetStatus();
+            this.Text = $"DeepSeek 批量处理大师 v3.0 - {status.StatusText}";
             this.Size = new System.Drawing.Size(780, 760);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
